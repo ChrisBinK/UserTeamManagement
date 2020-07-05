@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container-fluid home" >
+    <div>
+        <h1 style="margin-top:200px; margin-left:200px; margin-right:200px; font-size:40px;"> A place to manage your team of agents...</h1>
+        <div>
+            @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-dark btn-lg" })
+        </div>
+    </div>
+   
+</div>

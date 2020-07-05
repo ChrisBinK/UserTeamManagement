@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CallCenterAgentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AgentTeam">
+    <Key>
+      <PropertyRef Name="AgentTeamId" />
+    </Key>
+    <Property Name="AgentTeamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ManagerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK__AgentTeam__Agent__4E53A1AA" FromRole="AgentTeam" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK__AgentTeam__Manag__4F47C5E3" FromRole="AgentTeam" ToRole="AspNetUsers" />
+    <Property Name="TeamId" Type="Int32" />
+    <NavigationProperty Name="Team" Relationship="CallCenterAgentsModel.FK__AgentTeam__TeamI__19AACF41" FromRole="AgentTeam" ToRole="Team" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastLogin" Type="DateTime" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="PicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" />
+    <Property Name="AccessFailedCount" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AgentTeams" Relationship="Self.FK__AgentTeam__Agent__4E53A1AA" FromRole="AspNetUsers" ToRole="AgentTeam" />
+    <NavigationProperty Name="AgentTeams1" Relationship="Self.FK__AgentTeam__Manag__4F47C5E3" FromRole="AspNetUsers" ToRole="AgentTeam" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="ManagerTeams" Relationship="Self.FK__ManagerTe__Manag__29221CFB" FromRole="AspNetUsers" ToRole="ManagerTeam" />
+    <NavigationProperty Name="SupportCalls" Relationship="Self.FK__SupportCa__Solve__2739D489" FromRole="AspNetUsers" ToRole="SupportCall" />
+    <NavigationProperty Name="SupportCalls1" Relationship="Self.FK__SupportCa__UserI__282DF8C2" FromRole="AspNetUsers" ToRole="SupportCall" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="ManagerTeam">
+    <Key>
+      <PropertyRef Name="TeamManagerId" />
+    </Key>
+    <Property Name="TeamManagerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TeamId" Type="Int32" />
+    <Property Name="ManagerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK__ManagerTe__Manag__29221CFB" FromRole="ManagerTeam" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Team" Relationship="Self.FK__ManagerTe__TeamI__45F365D3" FromRole="ManagerTeam" ToRole="Team" />
+  </EntityType>
+  <EntityType Name="RoleUser">
+    <Key>
+      <PropertyRef Name="RoleUserId" />
+    </Key>
+    <Property Name="RoleUserId" Type="Int32" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="Note" Type="String" MaxLength="550" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SupportCall">
+    <Key>
+      <PropertyRef Name="SupportCallId" />
+    </Key>
+    <Property Name="SupportCallId" Type="Int32" Nullable="false" />
+    <Property Name="SupportCallEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SupportCallUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SupportCallDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="Solved" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="SolvedByAgentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="SolvedOn" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK__SupportCa__Solve__2739D489" FromRole="SupportCall" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK__SupportCa__UserI__282DF8C2" FromRole="SupportCall" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="TeamId" />
+    </Key>
+    <Property Name="TeamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ManagerTeams" Relationship="Self.FK__ManagerTe__TeamI__45F365D3" FromRole="Team" ToRole="ManagerTeam" />
+    <NavigationProperty Name="AgentTeams" Relationship="CallCenterAgentsModel.FK__AgentTeam__TeamI__19AACF41" FromRole="Team" ToRole="AgentTeam" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK__AgentTeam__Agent__4E53A1AA">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="AgentTeam" Type="Self.AgentTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgentTeam">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AgentTeam__Manag__4F47C5E3">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="AgentTeam" Type="Self.AgentTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgentTeam">
+        <PropertyRef Name="ManagerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ManagerTe__Manag__29221CFB">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="ManagerTeam" Type="Self.ManagerTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ManagerTeam">
+        <PropertyRef Name="ManagerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SupportCa__Solve__2739D489">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="SupportCall" Type="Self.SupportCall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupportCall">
+        <PropertyRef Name="SolvedByAgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SupportCa__UserI__282DF8C2">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="SupportCall" Type="Self.SupportCall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupportCall">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ManagerTe__TeamI__45F365D3">
+    <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+    <End Role="ManagerTeam" Type="Self.ManagerTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamId" />
+      </Principal>
+      <Dependent Role="ManagerTeam">
+        <PropertyRef Name="TeamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="CallCenterAgentsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AgentTeams" EntityType="Self.AgentTeam" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="ManagerTeams" EntityType="Self.ManagerTeam" />
+    <EntitySet Name="RoleUsers" EntityType="Self.RoleUser" />
+    <EntitySet Name="SupportCalls" EntityType="Self.SupportCall" />
+    <EntitySet Name="Teams" EntityType="Self.Team" />
+    <AssociationSet Name="FK__AgentTeam__Agent__4E53A1AA" Association="Self.FK__AgentTeam__Agent__4E53A1AA">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AgentTeam" EntitySet="AgentTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AgentTeam__Manag__4F47C5E3" Association="Self.FK__AgentTeam__Manag__4F47C5E3">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AgentTeam" EntitySet="AgentTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ManagerTe__Manag__29221CFB" Association="Self.FK__ManagerTe__Manag__29221CFB">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="ManagerTeam" EntitySet="ManagerTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SupportCa__Solve__2739D489" Association="Self.FK__SupportCa__Solve__2739D489">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="SupportCall" EntitySet="SupportCalls" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SupportCa__UserI__282DF8C2" Association="Self.FK__SupportCa__UserI__282DF8C2">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="SupportCall" EntitySet="SupportCalls" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ManagerTe__TeamI__45F365D3" Association="Self.FK__ManagerTe__TeamI__45F365D3">
+      <End Role="Team" EntitySet="Teams" />
+      <End Role="ManagerTeam" EntitySet="ManagerTeams" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AgentTeam__TeamI__19AACF41" Association="CallCenterAgentsModel.FK__AgentTeam__TeamI__19AACF41">
+      <End Role="Team" EntitySet="Teams" />
+      <End Role="AgentTeam" EntitySet="AgentTeams" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK__AgentTeam__TeamI__19AACF41">
+    <End Type="CallCenterAgentsModel.Team" Role="Team" Multiplicity="0..1" />
+    <End Type="CallCenterAgentsModel.AgentTeam" Role="AgentTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamId" />
+      </Principal>
+      <Dependent Role="AgentTeam">
+        <PropertyRef Name="TeamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

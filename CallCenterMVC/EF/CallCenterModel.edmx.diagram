@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bab6c777167147dfad92d9e783d1d001" Name="Diagram1">
+        <EntityTypeShape EntityType="CallCenterAgentsModel.AgentTeam" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CallCenterAgentsModel.AspNetRole" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CallCenterAgentsModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="CallCenterAgentsModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CallCenterAgentsModel.AspNetUser" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CallCenterAgentsModel.ManagerTeam" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CallCenterAgentsModel.RoleUser" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CallCenterAgentsModel.SupportCall" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CallCenterAgentsModel.Team" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CallCenterAgentsModel.FK__AgentTeam__Agent__4E53A1AA" ManuallyRouted="false" />
+        <AssociationConnector Association="CallCenterAgentsModel.FK__AgentTeam__Manag__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="CallCenterAgentsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CallCenterAgentsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CallCenterAgentsModel.FK__ManagerTe__Manag__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="CallCenterAgentsModel.FK__SupportCa__Solve__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="CallCenterAgentsModel.FK__SupportCa__UserI__282DF8C2" ManuallyRouted="false" />
+        <AssociationConnector Association="CallCenterAgentsModel.FK__ManagerTe__TeamI__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="CallCenterAgentsModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="CallCenterAgentsModel.FK__AgentTeam__TeamI__19AACF41" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,165 @@
+﻿@model CallCenterMVC.Models.ManagerIndexModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="" id="teams">
+    <div class="row ml-5 mr-5 mt-1">
+        <div class="col-5 shadow-sm p-3 mb-5 bg-white rounded p-3 ">
+            <h5 class="dark-primary lead text-center"> List of Agents</h5>
+            @for (int i = 0; i < (Model.Agents.Count >= 4 ? 4 : Model.Agents.Count); i++)
+            {
+
+                <div class="row  border-bottom m-3 ">
+                    <div class="col-3 ">
+                        <img class="img-thumbnail rounded-circle img-fluid" src="~/Images/user.png" width="100" height="80" />
+                    </div>
+                    <div class="col-9">
+                        <div class="row row-cols-1">
+                            <div class="col  dark-primary">   @Html.DisplayFor(modelItem => Model.Agents[i].FirstName) @Html.DisplayFor(modelItem => Model.Agents[i].LastName) </div>
+                            <div class="col "> @Html.DisplayFor(modelItem => Model.Agents[i].TeamName)</div>
+                            <div class="col dark-primary">
+                                <div class="row row-cols-3 mt-1">
+                                    <div class="col"><a href='@Url.Action("DeleteTeam", "Manager")' id = Model.Agents[i].Id  })'> <span class="material-icons">delete</span> </a></div>
+                                    <div class="col"><a href='@Url.Action("DeleteTeam", "Manager")'  id = Model.Agents[i].Id  })'> <span class="material-icons">swap_horiz </span> </a></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+            <div>
+                <button type="button" class="btn btn-light btn-lg btn-block">...</button>
+            </div>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-5 shadow-sm p-3 mb-5 bg-white rounded p-3">
+            <h6 class="dark-primary lead"> List of Teams</h6>
+            @for (int i = 0; i < (Model.Teams.Count >= 4 ? 4 : Model.Teams.Count); i++)
+            {
+
+                <div class="col dark-primary">
+                    <div class="row row-cols-3 mt-2 border-bottom m-3 ">
+                        <div class="col">
+                            <p> @Html.DisplayFor(modelItem => Model.Teams[i].TeamName) </p>
+                        </div>
+                        <div class="col-1"><a href='@Html.Raw(@Url.Action("DeleteTeam", "Manager",  new { @teamId = Model.Teams[i].TeamId  }))' class="team" > <span class="material-icons">delete</span></a></div>
+                        <div class="col-1"> <a href='@Url.Action("Edit", "Manager",  new { id = Model.Teams[i].TeamId  })' class="team"><span class="material-icons">edit</span></a></div>
+
+                    </div>
+                </div>
+            }
+            <div>
+                <button type="button" class="btn btn-light btn-lg btn-block" id="btnTeamList">...</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row mt-1 ml-5 mr-5 shadow-sm p-3 mb-5 bg-white rounded  row-cols-sm-2">
+        <div class="col">
+            <h3>
+                Number Team: @Html.DisplayFor(modelItem => Model.NumberOfTeams)
+            </h3>
+
+        </div>
+
+        <div class="col">
+            <h3>
+                Number Agent: @Html.DisplayFor(modelItem => Model.NumberOfAgents)
+            </h3>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="teamListModal">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title  mx-auto accent-color"> Teams</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ml-5 mr-5" id="modalbodyListTeam">
+               
+                    @Html.AntiForgeryToken()
+
+                    @for(int i = 0; i < Model.Teams.Count; i++)
+                    {
+
+                        <div class="col dark-primary">
+                            <div class="row row-cols-3 mt-2 border border-dark p-3 ">
+                                <div class="col">
+                                    <p> @Html.DisplayFor(modelItem => Model.Teams[i].TeamName) </p>
+                                </div>
+                                <input type="hidden" value="Model.Teams[i].TeamId" id="teamId" />
+                                <div class="col-2"> <a class="team" href='@Url.Action("DeleteTeam", "Manager", new { @teamId = Model.Teams[i].TeamId })'> <span class="material-icons">delete</span></a></div>
+                                <div class="col-2"> <a  class="team" href='@Url.Action("Edit", "Manager", new { id = Model.Teams[i].TeamId })'><span class="material-icons">edit</span></a></div>
+
+                            </div>
+                        </div>
+
+                    }
+                
+
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark" id="addAgentToTeam">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#btnTeamList').click(function (e) {
+                e.preventDefault();
+                $('#teamListModal').modal('show');
+                console.log("tftftf")
+            });
+
+
+            $("a.team").click(function (e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+  
+                $.ajax({
+
+                    url: url,
+                    type: 'POST',
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    dataType: 'json',
+                   
+                    success: function (data) {
+                        //$('#addAgentToTeamModal').modal('hide');
+                        $("#teamListModal").load(location.href + " #modalbodyListTeam>*", "");
+                        $("#teams").load(location.href + " #teams>*", "");
+                    },
+                    error: function (e) {
+                        console.log('error' + e.message);
+                        
+                        
+                    }
+
+                });//*/
+            });
+        });
+
+    </script>
+}
+
+

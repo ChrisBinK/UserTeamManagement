@@ -1,0 +1,66 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: 'Alegreya', serif;
+    font-size: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    min-height: 100%;
+    min-width: 1024px;
+    letter-spacing: 0.001em;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.dark-primary {
+    color:#512DA8 !important;
+}
+.accent-color {
+    color: #E040FB !important;
+}
+.divider-color {
+    color: #BDBDBD !important;
+}
+
+.home {
+    background-color: #BA55D3; /* orchid*/
+    color: antiquewhite;
+    font-size: 120em !important;
+    letter-spacing:0.001em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+    max-height:100%;
+    margin-top:50px;
+    
+}
+
+.btn-width{
+    min-width:400px !important;
+    
+}
+
+.team{
+
+}
+
+.agent{
+
+}
